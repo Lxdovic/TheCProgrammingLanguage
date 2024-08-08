@@ -8,14 +8,14 @@ int main(void) {
     upper = 300;
     step = 20;
 
-    fahr = lower;
+    celsius = lower;
 
-    printf("%3c %6c\n", 'F', 'C');
+    printf("%3c %6c\n", 'C', 'F');
 
-    while (fahr <= upper) {
-        celsius = (5.0/9.0) * (fahr - 32.0);
+    while (celsius <= upper) {
+        fahr = celsius * (9.0 / 5.0) + 32.0;
 
         printf("%3.0f %6.1f\n", fahr, celsius);
-        fahr += step;
+        celsius += step;
     }
 }
