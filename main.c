@@ -1,22 +1,28 @@
 #include <stdio.h>
 
 int main(void) {
-    int c, nc;
+    int c;
 
     while ((c = getchar()) != EOF) {
-        if (c == ' ') {
-            while ((nc = getchar()) == ' ')
-                ;
-
-            putchar(c);
-            putchar(nc);
+        switch (c) {
+            case '\\':
+                putchar('\\');
+                putchar('\\');
+                break;
+            case '\t':
+                putchar('\\');
+                putchar('t');
+                break;
+            case '\b':
+                putchar('\\');
+                putchar('b');
+                break;
+            default:
+                putchar(c);
+                break;
         }
-
-        else {
-            putchar(c);
-        }
-
     }
 
+    return 0;
 }
 
