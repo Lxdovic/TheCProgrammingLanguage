@@ -2,30 +2,23 @@
 
 int main(void) {
     int c, l;
-    int lengths[10];
+    int freq[26];
 
     while ((c = getchar()) != EOF) {
-        if (c == ' ' || c == '\t' || c == '\n') {
-            if (l > 0 && l < 10) {
-                lengths[l]++;
-            }
-
-            l = 0;
-            continue;
+        if (c >= 'a' && c <= 'z') {
+            l = c - 'a';
+            freq[l]++;
         }
-
-        l++;
     }
 
-    if (l > 0 && l < 10) {
-        lengths[l]++;
-    }
+    for (int i = 0; i < 26; i++) {
+        printf("%c: ", 'a' + i);
 
-    for (int i = 0; i < 10; i++) {
-        printf("%d: ", i);
-        for (int j = 0; j < lengths[i]; j++) {
+
+        for (int j = 0; j < freq[i]; j++) {
             printf("*");
         }
+
         printf("\n");
     }
 
