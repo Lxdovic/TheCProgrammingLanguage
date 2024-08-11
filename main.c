@@ -1,28 +1,24 @@
 #include <stdio.h>
 
+#define LOWER 0
+#define UPPER 300
+#define STEP 20
+
+float fahrToCelsius(float fahr);
+
 int main(void) {
-    int c, l;
-    int freq[26];
+    float fahr, celsius;
 
-    while ((c = getchar()) != EOF) {
-        if (c >= 'a' && c <= 'z') {
-            l = c - 'a';
-            freq[l]++;
-        }
+    fahr = LOWER;
+
+    while (fahr <= UPPER) {
+        celsius = fahrToCelsius(fahr);
+        printf("%3.0f %6.1f\n", fahr, celsius);
+        fahr = fahr + STEP;
     }
+}
 
-    for (int i = 0; i < 26; i++) {
-        printf("%c: ", 'a' + i);
-
-
-        for (int j = 0; j < freq[i]; j++) {
-            printf("*");
-        }
-
-        printf("\n");
-    }
-
-    return 0;
-
+float fahrToCelsius(float fahr) {
+    return (5.0 / 9.0) * (fahr - 32.0);
 }
 
