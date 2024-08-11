@@ -1,35 +1,46 @@
 #include <stdio.h>
 
-#define MIN 81
-
-int _getline(char s[], int min);
-
 int main(void) {
-    int len;
-    int c;
-    char line[MIN];
+    int c, s;
+    int blank = 1;
+    int t = s = 0;
 
-    while ((len = _getline(line, MIN)) > 0) {
-        if (len < MIN) continue;
-
-        for (int i = 0; i < len; i++) {
-            putchar(line[i]);
+    while ((c = getchar()) != EOF) {
+        if (c == '\t') {
+            t++;
+            continue;
         }
 
-        while ((c = getchar()) != EOF) {
-            putchar(c);
-
-            if (c == '\n') break;
+        if (c == ' ') {
+            s++;
+            continue;
         }
+
+        if (c == '\n') {
+            if (blank == 0) putchar('\n');
+
+            t = 0;
+            s = 0;
+            blank = 1;
+            continue;
+        }
+
+
+        if (blank == 0) {
+            for (int i = 0; i < t; i++)
+                putchar('\t');
+
+            for (int i = 0; i < s; i++)
+                putchar(' ');
+        }
+
+        if (t > 0) t = 0;
+        if (s > 0) s = 0;
+
+        blank = 0;
+
+        putchar(c);
     }
 
     return 0;
-}
-
-int _getline(char s[], int min) {
-    int c, i;
-    for (i = 0; i < min && (c = getchar()) != EOF && c != '\n'; ++i)
-        s[i] = c;
-
-    return i;
 }
