@@ -23,9 +23,9 @@ void reverse(char input[]) {
         length++;
 
     for (int i = 0; i < length / 2; i++) {
-        int tmp = input[i];
-        input[i] = input[length - 1 - i];
-        input[length - 1 - i] = tmp;
+        input[i] ^= input[length - 1 - i];
+        input[length - 1 - i] ^= input[i];
+        input[i] ^= input[length - 1 - i];
     }
 }
 
