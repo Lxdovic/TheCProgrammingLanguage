@@ -1,46 +1,46 @@
 #include <stdio.h>
 
+#define MAXLINE 1000
+
+void reverse(char input[]);
+
+int get_line(char s[], int limit);
+
 int main(void) {
-    int c, s;
-    int blank = 1;
-    int t = s = 0;
+    int size;
+    char line[MAXLINE];
 
-    while ((c = getchar()) != EOF) {
-        if (c == '\t') {
-            t++;
-            continue;
-        }
-
-        if (c == ' ') {
-            s++;
-            continue;
-        }
-
-        if (c == '\n') {
-            if (blank == 0) putchar('\n');
-
-            t = 0;
-            s = 0;
-            blank = 1;
-            continue;
-        }
-
-
-        if (blank == 0) {
-            for (int i = 0; i < t; i++)
-                putchar('\t');
-
-            for (int i = 0; i < s; i++)
-                putchar(' ');
-        }
-
-        if (t > 0) t = 0;
-        if (s > 0) s = 0;
-
-        blank = 0;
-
-        putchar(c);
+    while ((size = get_line(line, MAXLINE)) > 0) {
+        reverse(line);
+        printf("%s", line);
     }
+}
 
-    return 0;
+void reverse(char input[]) {
+    int length = 0;
+    int i;
+
+    for (i = 0; input[i] != '\n'; i++)
+        length++;
+
+    for (int i = 0; i < length / 2; i++) {
+        int tmp = input[i];
+        input[i] = input[length - 1 - i];
+        input[length - 1 - i] = tmp;
+    }
+}
+
+int get_line(char s[], int limit) {
+    int c = 0;
+    int i = 0;
+
+    for (i = 0; i < limit - 1 && (c = getchar()) != '\n' && c != EOF; ++i) {
+        s[i] = c;
+    }
+    if (c == '\n') {
+        s[i] = c;
+        ++i;
+    }
+    s[i] = '\0';
+    return i;
 }
