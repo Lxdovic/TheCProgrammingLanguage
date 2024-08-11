@@ -1,54 +1,35 @@
 #include <stdio.h>
 
-#define MAXLINE 1000
+#define MIN 81
 
-/* maximum input line length */
-int _getline(char s[], int maxline);
-
-void copy(char to[], char from[]);
+int _getline(char s[], int min);
 
 int main(void) {
     int len;
-    int max;
     int c;
-    char line[MAXLINE];
-    char longest[MAXLINE];
+    char line[MIN];
 
-    max = 0;
+    while ((len = _getline(line, MIN)) > 0) {
+        if (len < MIN) continue;
 
-    while ((len = _getline(line, MAXLINE)) > 0) {
-        if (line[len - 1] != '\n') {
-            while ((c = getchar()) != EOF && c != '\n') {
-                ++len;
-            }
+        for (int i = 0; i < len; i++) {
+            putchar(line[i]);
         }
 
-        if (len > max) {
-            max = len;
-            copy(longest, line);
+        while ((c = getchar()) != EOF) {
+            putchar(c);
+
+            if (c == '\n') break;
         }
     }
 
-    if (max > 0)
-        printf("%i %s", max, longest);
     return 0;
 }
 
-int _getline(char s[], int lim) {
+int _getline(char s[], int min) {
     int c, i;
-    for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
+    for (i = 0; i < min && (c = getchar()) != EOF && c != '\n'; ++i)
         s[i] = c;
-    if (c == '\n') {
-        s[i] = c;
-        ++i;
-    }
-    s[i] = '\0';
-    return i;
-}
 
-void copy(char to[], char from[]) {
-    int i;
-    i = 0;
-    while ((to[i] = from[i]) != '\0')
-        ++i;
+    return i;
 }
