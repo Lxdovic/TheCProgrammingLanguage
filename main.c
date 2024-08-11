@@ -7,10 +7,9 @@ void reverse(char input[]);
 int get_line(char s[], int limit);
 
 int main(void) {
-    int size;
     char line[MAXLINE];
 
-    while ((size = get_line(line, MAXLINE)) > 0) {
+    while ((get_line(line, MAXLINE)) > 0) {
         reverse(line);
         printf("%s", line);
     }
@@ -32,7 +31,7 @@ void reverse(char input[]) {
 
 int get_line(char s[], int limit) {
     int c = 0;
-    int i = 0;
+    int i;
 
     for (i = 0; i < limit - 1 && (c = getchar()) != '\n' && c != EOF; ++i) {
         s[i] = c;
