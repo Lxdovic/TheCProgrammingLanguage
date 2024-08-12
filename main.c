@@ -1,45 +1,63 @@
 #include <stdio.h>
 
-#define MAXLINE 1000
-
-void reverse(char input[]);
-
-int get_line(char s[], int limit);
-
 int main(void) {
-    char line[MAXLINE];
+    long long unsigned int max;
 
-    while ((get_line(line, MAXLINE)) > 0) {
-        reverse(line);
-        printf("%s", line);
-    }
-}
+    /* characters */
+    signed char c;
 
-void reverse(char input[]) {
-    int length = 0;
-    int i;
+    for (c = max = 1; c > 0; c *= 2)
+        max *= 2;
+    printf("signed char        %30i %30llu\n", c, max - 1);
 
-    for (i = 0; input[i] != '\n'; i++)
-        length++;
+    unsigned char uc;
 
-    for (int i = 0; i < length / 2; i++) {
-        input[i] ^= input[length - 1 - i];
-        input[length - 1 - i] ^= input[i];
-        input[i] ^= input[length - 1 - i];
-    }
-}
+    for (uc = -1; uc < 0; uc *= 2)
+        max *= 2;
+    printf("unsigned char      %30i %30u\n", 0, uc);
 
-int get_line(char s[], int limit) {
-    int c = 0;
-    int i;
+    /* Integers */
+    signed short shrt;
 
-    for (i = 0; i < limit - 1 && (c = getchar()) != '\n' && c != EOF; ++i) {
-        s[i] = c;
-    }
-    if (c == '\n') {
-        s[i] = c;
-        ++i;
-    }
-    s[i] = '\0';
-    return i;
+    for (shrt = max = 1; shrt > 0; shrt *= 2)
+        max *= 2;
+    printf("signed short       %30i %30llu\n", shrt, max - 1);
+
+    unsigned short uShrt;
+
+    for (uShrt = -1; uShrt < 0; uShrt *= 2)
+        max += uShrt;
+    printf("unsigned short     %30i %30u\n", 0, uShrt);
+
+    signed int i;
+
+    for (i = max = 1; i > 0; i *= 2)
+        max *= 2;
+    printf("signed int         %30i %30llu\n", i, max - 1);
+
+    unsigned int ui;
+
+    for (ui = -1; ui < 0; ui *= 2);
+    printf("unsigned int       %30u %30u\n", 0, ui);
+
+    signed long int li;
+
+    for (li = max = 1; li > 0; li *= 2)
+        max *= 2;
+    printf("signed long        %30li %30llu\n", li, max - 1);
+
+    unsigned long int uli;
+
+    for (uli = -1; uli < 0; uli *= 2);
+    printf("unsigned long      %30u %30lu\n", 0, uli);
+
+    signed long long lli;
+
+    for (lli = max = 1; lli > 0; lli *= 2)
+        max *= 2;
+    printf("signed long long   %30lli %30llu\n", lli, max - 1);
+
+    unsigned long long ulli;
+    for (ulli = -1; ulli < 0; ulli *= 2);
+    printf("unsigned long long %30i %30llu\n", 0, ulli);
 }
